@@ -1,0 +1,9 @@
+# Apparently web app: send any /app/... path to the app's start file.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /app/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /app/index.html [L]
+</IfModule>

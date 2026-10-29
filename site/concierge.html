@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Apparently Concierge · How it works</title>
+<meta name="description" content="Event nights and getaways, booked for you. One all-in price, and your card is only charged once your tickets are secured." />
+<style>
+  :root {
+    --bg: #faf8fc; --card: #ffffff; --ink: #17121f; --muted: #5d5568; --line: #e9e3f0;
+    --violet: #8b5cf6; --pink: #e91e8c; --green: #0f9d6b; --green-bg: #e8f7f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d0a14; --card: #17121f; --ink: #f4f1f8; --muted: #a79fb3; --line: #2a2235; --green: #3ccf95; --green-bg: #10261d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 32px 16px 56px; }
+  .hero { border-radius: 22px; padding: 28px 24px; color: #fff; background: linear-gradient(135deg, var(--violet), var(--pink)); }
+  .hero small { text-transform: uppercase; letter-spacing: .12em; font-weight: 700; opacity: .85; font-size: 12px; }
+  .hero h1 { margin: 6px 0 8px; font-size: 30px; line-height: 1.15; }
+  .hero p { margin: 0; opacity: .95; }
+  h2 { font-size: 20px; margin: 32px 0 12px; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--violet), var(--pink)); }
+  .steps b { display: block; }
+  .steps span { color: var(--muted); }
+  .guarantee { margin-top: 28px; border-radius: 18px; padding: 20px; background: var(--green-bg); border: 1px solid color-mix(in srgb, var(--green) 35%, transparent); }
+  .guarantee h2 { margin: 0 0 6px; color: var(--green); }
+  .guarantee p { margin: 6px 0 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 4px 18px; }
+  .card p { margin: 14px 0; }
+  .card p + p { border-top: 1px solid var(--line); padding-top: 14px; }
+  .muted { color: var(--muted); }
+  footer { margin-top: 32px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <small>Apparently Concierge</small>
+    <h1>Event nights and getaways, booked for you.</h1>
+    <p>Concert and game tickets, flights, hotels and rides, put together as one package with one all-in price.</p>
+  </section>
+
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><div class="n">1</div><div><b>Grab a package in the Apparently app.</b><span>The price you see is the whole price: tickets or travel plus our planning and booking fee. No fees added later.</span></div></li>
+    <li><div class="n">2</div><div><b>Pay with our secure Stripe link.</b><span>Your card is only held, not charged, while we book.</span></div></li>
+    <li><div class="n">3</div><div><b>We book it for you.</b><span>We buy your tickets or book your trip in your name, usually within 24 hours, and send everything to your email.</span></div></li>
+    <li><div class="n">4</div><div><b>Then the charge goes through.</b><span>Only once your tickets or bookings are secured.</span></div></li>
+  </ol>
+
+  <section class="guarantee">
+    <h2>✅ Delivery Guarantee</h2>
+    <p><b>Your tickets on time, or you pay nothing.</b> If we can't get what you grabbed at the price you saw, we release the hold on your card and you're never charged. If a charge has already gone through, you get every cent back.</p>
+  </section>
+
+  <h2>Good to know</h2>
+  <div class="card">
+    <p><b>What we need from you.</b> <span class="muted">The email your tickets should go to. For flights: each traveler's full name exactly as on their ID, and date of birth.</span></p>
+    <p><b>If an event is cancelled,</b> <span class="muted">you get a full refund, including our fee. If it's postponed, your tickets carry over to the new date; if you can't make it, refunds follow the event's own policy.</span></p>
+    <p><b>Flights and hotels</b> <span class="muted">follow the airline's and hotel's change and cancellation rules. We tell you those rules before we book.</span></p>
+    <p><b>Who we are.</b> <span class="muted">Apparently Concierge is run by the Apparently team (Doseofit LLC, Newark, NJ) with help from Claude, an AI assistant. A person approves every purchase. We're not affiliated with Ticketmaster, venues, artists, teams, airlines or hotels.</span></p>
+    <p><b>Questions?</b> <span class="muted">Message Apparently Concierge in the Apparently app.</span></p>
+  </div>
+
+  <footer>© Doseofit LLC · Apparently</footer>
+</main>
+</body>
+</html>
