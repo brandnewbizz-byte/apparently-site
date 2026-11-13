@@ -4,32 +4,24 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Apparently · Privacy Policy</title>
-<meta name="description" content="How Doseofit LLC collects, uses, shares and protects information in the Apparently app, website and marketplace, and the choices and rights you have." />
+<meta name="description" content="How the Apparently app collects, uses and protects your information." />
 <style>
-  :root { --bg: #faf8fc; --card: #ffffff; --ink: #17121f; --muted: #5d5568; --line: #e9e3f0; --violet: #8b5cf6; --pink: #e91e8c; --head: #f3eefa; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #0d0a14; --card: #17121f; --ink: #f4f1f8; --muted: #a79fb3; --line: #2a2235; --head: #221a2e; } }
+  :root { --bg: #faf8fc; --card: #ffffff; --ink: #17121f; --muted: #5d5568; --line: #e9e3f0; --violet: #8b5cf6; --pink: #e91e8c; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0d0a14; --card: #17121f; --ink: #f4f1f8; --muted: #a79fb3; --line: #2a2235; } }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
   .hero { border-radius: 22px; padding: 26px 22px; color: #fff; background: linear-gradient(135deg, var(--violet), var(--pink)); }
   .hero small { text-transform: uppercase; letter-spacing: .12em; font-weight: 700; opacity: .85; font-size: 12px; }
   .hero h1 { margin: 6px 0 6px; font-size: 30px; line-height: 1.15; }
   .hero p { margin: 0; opacity: .95; }
-  h2 { font-size: 20px; margin: 34px 0 8px; scroll-margin-top: 16px; }
-  h3 { font-size: 16px; margin: 18px 0 4px; }
+  h2 { font-size: 20px; margin: 30px 0 8px; }
   p, li { color: var(--ink); }
-  ul, ol { padding-left: 22px; }
-  li { margin: 5px 0; }
+  ul { padding-left: 20px; }
+  li { margin: 4px 0; }
   .muted { color: var(--muted); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 8px 18px; margin-top: 16px; }
-  .toc { columns: 2; column-gap: 24px; font-size: 14.5px; }
-  @media (max-width: 560px) { .toc { columns: 1; } }
-  .table-wrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 14px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14.5px; background: var(--card); }
-  th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
-  th { background: var(--head); font-weight: 700; }
-  tr:last-child td { border-bottom: 0; }
-  a { color: var(--violet); overflow-wrap: anywhere; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 6px 18px; margin-top: 14px; }
+  a { color: var(--violet); }
   nav { margin-top: 36px; font-size: 14px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; }
 </style>
 </head>
@@ -38,278 +30,63 @@
   <section class="hero">
     <small>Apparently</small>
     <h1>Privacy Policy</h1>
-    <p>Effective November 10, 2026</p>
+    <p>Last updated October 30, 2026</p>
   </section>
 
-  <p>This Privacy Policy explains how <b>Doseofit LLC</b> (“<b>Apparently</b>”, “<b>we</b>”, “<b>us</b>” or “<b>our</b>”) collects, uses, shares and protects information when you use the Apparently mobile apps, the website at apparentlyappdashboard.nationalcompliancehub.com, the web app, the marketplace, Apparently Concierge, and every related feature and communication (together, the “<b>Service</b>”). It also explains the choices and rights you have.</p>
+  <p>This policy explains what information the Apparently app and website (“Apparently”, “we”, “us”) collect, how we use it, and the choices you have. If you have questions, email <a href="mailto:concierge@nationalcompliancehub.com">concierge@nationalcompliancehub.com</a>.</p>
 
-  <p>This policy is part of our <a href="/terms.html">Terms of Service</a>. Words with capital letters that aren't defined here have the meaning given in the Terms.</p>
-
-  <div class="card">
-    <p><b>The short version</b> (the full policy below is what counts):</p>
-    <ul>
-      <li>We collect what you give us (your account, posts, messages, listings and orders), what happens when you use the Service, and basic information about your device.</li>
-      <li>We use it to run, personalize and protect Apparently, to process payments, and to talk to you about your account.</li>
-      <li>Your profile and public posts can be seen by other people. Messages are seen by the people in the chat.</li>
-      <li>Service providers such as Supabase, Stripe, Apple, Google, RevenueCat, OpenAI and others process information for us under contract.</li>
-      <li><b>We don't sell your personal information, we don't share it for cross-context behavioral advertising, and we don't show third-party ads.</b></li>
-      <li>We don't collect your precise location and don't track you across other companies' apps or websites.</li>
-      <li>You can see, change, download or delete your information, and delete your account at any time.</li>
-    </ul>
-  </div>
-
-  <h2>Contents</h2>
-  <ol class="toc">
-    <li><a href="#s1">Information we collect</a></li>
-    <li><a href="#s2">How we use information</a></li>
-    <li><a href="#s3">How we use AI</a></li>
-    <li><a href="#s4">How information is shared</a></li>
-    <li><a href="#s5">Our service providers</a></li>
-    <li><a href="#s6">Calls, live rooms and Spot</a></li>
-    <li><a href="#s7">Payments and the marketplace</a></li>
-    <li><a href="#s8">Your choices and controls</a></li>
-    <li><a href="#s9">Your privacy rights</a></li>
-    <li><a href="#s10">U.S. state privacy notice</a></li>
-    <li><a href="#s11">Legal bases (EEA, UK and Switzerland)</a></li>
-    <li><a href="#s12">How long we keep information</a></li>
-    <li><a href="#s13">Deleting your account</a></li>
-    <li><a href="#s14">Security</a></li>
-    <li><a href="#s15">International transfers</a></li>
-    <li><a href="#s16">Children and teens</a></li>
-    <li><a href="#s17">Cookies and local storage</a></li>
-    <li><a href="#s18">Third-party links and content</a></li>
-    <li><a href="#s19">Changes to this policy</a></li>
-    <li><a href="#s20">Contact us</a></li>
-  </ol>
-
-  <h2 id="s1">1. Information we collect</h2>
-  <p>What we collect depends on how you use the Service. Some information is needed to use Apparently at all (for example, an email address to create an account); other information is only collected if you choose to use a feature.</p>
-
-  <h3>Information you give us</h3>
+  <h2>What we collect</h2>
   <ul>
-    <li><b>Account and profile:</b> your email address, password (stored only in scrambled, “hashed” form by our sign-in provider), name, username, profile photo, bio, and anything else you add, such as a city or phone number. You can choose to make your profile private.</li>
-    <li><b>Sign-up choices:</b> your agreement to our Terms, and the answers you give during onboarding, such as your age group and the topics you're into.</li>
-    <li><b>Content you create and share:</b> posts, stories, photos, videos, captions, comments, likes, reactions, ratings, voice notes, Bundles, Skill Deals, listings, requests, plans and Planner entries, Spot rooms you create, and anything else you post, upload or send.</li>
-    <li><b>Messages:</b> the messages, photos, videos and voice notes you send and receive, and when they were sent, delivered and read.</li>
-    <li><b>Orders and marketplace activity:</b> what you grab, book, buy or sell, order details and status, payment requests, amounts, service fees, ratings and order history.</li>
-    <li><b>Payout and identity details for sellers:</b> if you get paid through Apparently, our payment processor Stripe collects the identity, tax and bank details it needs. We receive only limited information back, such as whether your account is verified and able to receive payouts.</li>
-    <li><b>Concierge requests:</b> what you ask Apparently Concierge to help with, and our conversation with you.</li>
-    <li><b>Reports, appeals and support:</b> reports you make about people or content, blocks, appeals, and anything you tell us when you contact us.</li>
-    <li><b>Security settings:</b> whether you turned on 2-step sign-in, and the devices you chose to “remember” (with a name for each device).</li>
+    <li><b>Account details:</b> your email address, name, username, profile photo and bio.</li>
+    <li><b>What you post and send:</b> posts, stories, photos, videos, comments, messages, voice notes, bundles, skill deals, requests, plans, and reports you make.</li>
+    <li><b>Orders and payments:</b> what you grab or sell, order status, payment requests and amounts. Card payments are handled by Stripe; we never see or store your full card number. If you sell on Apparently, Stripe collects the identity and bank details it needs to pay you.</li>
+    <li><b>Subscriptions:</b> your plan and its status from the App Store or Google Play (through RevenueCat). We don't receive your payment card details.</li>
+    <li><b>Your feed choices:</b> what you grab, skip, save or hide, and the kinds of plans you pick, so we can show you things you'll like.</li>
+    <li><b>Device information:</b> a push notification token if you allow notifications, and basic technical data such as app version and crash information.</li>
+    <li><b>Camera, microphone and photos:</b> only when you choose to take or share a photo, video or voice note, or join a call or Spot room.</li>
+  </ul>
+  <p class="muted">We don't collect your precise location, and we don't track you across other companies' apps or websites.</p>
+
+  <h2>How we use it</h2>
+  <ul>
+    <li>To run the app: your profile, posts, messages, orders, payments and notifications.</li>
+    <li>To personalize your Home feed.</li>
+    <li>To keep Apparently safe: reviewing reports, blocking abuse, preventing fraud.</li>
+    <li>To contact you about your account, orders and important changes.</li>
+  </ul>
+  <p>We don't sell your personal information and we don't show third-party ads.</p>
+
+  <h2>Who we share it with</h2>
+  <ul>
+    <li><b>Other members:</b> your profile and public posts are visible to people on Apparently. Messages are visible to the people in the conversation. When you grab or sell something, the other person sees your name and the order details.</li>
+    <li><b>Service providers</b> who run parts of the app for us: Supabase (hosting and database), Stripe (payments and payouts), RevenueCat, Apple and Google (subscriptions), and Expo (push notifications). They may only use your information to provide their service.</li>
+    <li><b>The law:</b> if required by law, or to protect people's safety and the security of the app.</li>
   </ul>
 
-  <h3>Information created when you use the Service</h3>
+  <h2>Your choices</h2>
   <ul>
-    <li><b>Activity:</b> the posts, stories, videos, profiles, Bundles and Skill Deals you view, like, save, skip, hide, share or comment on; who you follow and who follows you; the Spot rooms you join; how long you watch; and the searches you make in the app.</li>
-    <li><b>Feed preferences:</b> a taste profile built from your onboarding answers and your activity, used to choose what you see in your feeds. It is saved with your account so it works on every device you use.</li>
-    <li><b>Story and post views:</b> when you view someone's story, they can see that you viewed it, as in other social apps.</li>
-    <li><b>Calls and live rooms:</b> who called whom, when, whether a call was answered, how long it lasted, and who joined a Spot room. We do <b>not</b> record the sound or video of calls or rooms. See <a href="#s6">Section 6</a>.</li>
-    <li><b>Subscriptions:</b> your Apparently plan, its status and renewal date, received from Apple, Google and RevenueCat.</li>
+    <li>Edit your profile any time in Settings → Edit profile.</li>
+    <li>Turn notifications on or off in Settings → Notifications.</li>
+    <li>Block people in their profile, and see blocked accounts in Settings.</li>
+    <li id="delete"><b>Delete your account</b> in Settings → Account → Delete account, or <a href="/delete-account.html">request deletion on the web</a>. This deletes your profile, posts, messages, listings and bookings. Records we must keep by law (for example payment records) are kept only as long as required.</li>
+    <li>You can also email us to see, correct or delete your information.</li>
   </ul>
 
-  <h3>Device and technical information</h3>
-  <ul>
-    <li><b>Device details:</b> device type, operating system and version, app version, language, time zone, and identifiers we create for your app install.</li>
-    <li><b>Notification tokens:</b> if you allow notifications, a push token from Apple or Google (and, for calls on iPhone, a VoIP push token) so we can send you notifications and ring you for calls.</li>
-    <li><b>Network and log information:</b> IP address, connection type, the date and time of requests, and the pages or features used, kept in our servers' logs. We may use an IP address to work out an approximate region, for example to fight fraud, but not your precise location.</li>
-    <li><b>Diagnostics:</b> crash reports, error messages and performance information about the app.</li>
-    <li><b>Device permissions:</b> with your permission, we access your <b>camera</b>, <b>microphone</b> and <b>photos</b> only when you use a feature that needs them (taking or sharing a photo, video or voice note, joining a call or a Spot room). We only access the photos and videos you pick. You can change these permissions in your phone's settings at any time.</li>
-  </ul>
-  <p class="muted">We don't request your device's precise location (GPS), contacts, calendar, or advertising identifier, and we don't track you across other companies' apps and websites.</p>
+  <h2>How long we keep it</h2>
+  <p>We keep your information while your account is open. When you delete your account, we delete your information within 30 days, except what we must keep for legal, tax or fraud-prevention reasons.</p>
 
-  <h3>Information from others</h3>
-  <ul>
-    <li><b>Other members:</b> people may mention or tag you, message you, send you payment requests, rate a deal with you, share content that includes you, or report your account or content.</li>
-    <li><b>Partners and service providers:</b> Stripe (payment and payout status), and Apple, Google and RevenueCat (purchases and subscriptions).</li>
-  </ul>
+  <h2>Security</h2>
+  <p>Your information is stored with access controls and sent over encrypted connections. No system is perfectly secure, so please use a strong password and keep it private.</p>
 
-  <h2 id="s2">2. How we use information</h2>
-  <h3>To provide and run the Service</h3>
-  <ul>
-    <li>Create and manage your account, sign you in, and keep you signed in.</li>
-    <li>Show your profile and content, deliver messages, connect calls and Spot rooms, and send notifications you've chosen to get.</li>
-    <li>Run the marketplace: list Bundles and Skill Deals, process orders, payments, payouts, refunds and service fees, and show order status.</li>
-    <li>Run the Planner: save your plans, send reminders before them, and suggest ideas for your free time.</li>
-    <li>Provide Concierge and customer support.</li>
-  </ul>
-  <h3>To personalize your experience</h3>
-  <ul>
-    <li>Choose and order what you see in Home, Feed and other surfaces, based on your taste profile, who you follow, what you've engaged with, and what's popular.</li>
-    <li>Suggest people, Spot rooms, plans and things to do.</li>
-  </ul>
-  <h3>To keep people and the Service safe</h3>
-  <ul>
-    <li>Verify accounts and activity, find and stop spam, scams, fraud, abuse, and accounts that break our Terms.</li>
-    <li>Review reports, remove content, limit features or close accounts, and handle appeals.</li>
-    <li>Protect the security of accounts, including 2-step sign-in and suspicious sign-in checks.</li>
-  </ul>
-  <h3>To improve the Service</h3>
-  <ul>
-    <li>Understand how features are used, fix bugs and crashes, test new features, and measure performance.</li>
-  </ul>
-  <h3>To communicate with you</h3>
-  <ul>
-    <li>Send messages about your account, security codes, orders, payments, subscriptions, changes to our Terms or this policy, and replies to your requests.</li>
-    <li>With your permission, tell you about new features. You can turn these off at any time.</li>
-  </ul>
-  <h3>For legal reasons</h3>
-  <ul>
-    <li>Follow the law, respond to valid legal requests, enforce our Terms, keep tax and payment records, and protect the rights, property and safety of Apparently, our members and others.</li>
-  </ul>
+  <h2>Children</h2>
+  <p>Apparently isn't for children. You must be at least 18 to use the marketplace and payments, and at least 13 to use Apparently at all. If we learn that a child under 13 has an account, we delete it.</p>
 
-  <h2 id="s3">3. How we use AI</h2>
-  <p>Some features use artificial intelligence provided by OpenAI:</p>
-  <ul>
-    <li><b>Post topics:</b> when you share a public post, its caption and picture (or a video's cover image) may be analyzed to choose topics, spot content that may be sensitive, and help decide which posts to feature in feeds.</li>
-    <li><b>Planner ideas:</b> when you ask for ideas, we send what's needed to make them, such as the city and day you're planning for, the kind of outing you picked, your free time, your general interests and your age group. We don't send your name, email or username.</li>
-  </ul>
-  <p>OpenAI processes this information for us as a service provider. Under its API terms, it may not use information sent through its API to train its models. AI results can be wrong, so suggestions are a starting point, and people review reports and moderation decisions where it matters.</p>
+  <h2>Changes</h2>
+  <p>If we change this policy, we'll update the date above and, for important changes, let you know in the app.</p>
 
-  <h2 id="s4">4. How information is shared</h2>
-  <h3>With other people on Apparently</h3>
-  <ul>
-    <li><b>Public information:</b> your name, username, profile photo and bio can be seen by anyone on Apparently, even if your account is private. If your account is public, your posts, stories, Bundles, Skill Deals and the people you follow can be seen by anyone using the Service. Public content can be viewed, shared, saved or screenshotted by others, and may stay visible in other people's copies after you delete it.</li>
-    <li><b>Private accounts:</b> if your account is private, only followers you approve can see your posts and stories and message you.</li>
-    <li><b>Messages and calls:</b> are seen by the people in the conversation. Group chat and Spot room members can see who else is there.</li>
-    <li><b>Spot rooms:</b> people in a room can see and hear what you say and show while your mic or camera is on, and see who is in the room.</li>
-    <li><b>Marketplace:</b> when you buy or sell, the other person sees your name, profile and the order details they need, such as the time, place and notes for the service.</li>
-    <li><b>Ratings and comments:</b> ratings, reviews, likes and comments you leave may be seen by others.</li>
-  </ul>
-  <h3>With service providers</h3>
-  <p>We share information with companies that help us run the Service, listed in <a href="#s5">Section 5</a>. They may use it only to provide their service to us, and must protect it.</p>
-  <h3>For legal reasons and to prevent harm</h3>
-  <p>We may access, keep and share information when we believe in good faith it's needed to: follow the law, a court order, subpoena or other legal process; respond to valid requests from law enforcement or government agencies; detect, stop and deal with fraud, abuse, security issues and violations of our Terms; or protect the rights, property and safety of Apparently, our members or anyone else, including to prevent death or serious harm.</p>
-  <h3>Business changes</h3>
-  <p>If Doseofit LLC is involved in a merger, sale, financing, reorganization, bankruptcy or sale of some or all of its assets, information may be transferred as part of that deal. This policy will keep applying to it unless you're told otherwise.</p>
-  <h3>With your consent</h3>
-  <p>We share information in other ways when you tell us to, for example when you share content outside Apparently.</p>
-  <p><b>We don't sell your personal information, we don't share it with third parties for their own marketing, and we don't share it for cross-context behavioral advertising.</b></p>
-
-  <h2 id="s5">5. Our service providers</h2>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Provider</th><th>What they do for us</th></tr></thead>
-      <tbody>
-        <tr><td>Supabase</td><td>Hosting, database, file storage, sign-in and server functions</td></tr>
-        <tr><td>Stripe</td><td>Card payments, payment requests, seller identity checks and payouts</td></tr>
-        <tr><td>Apple and Google</td><td>App distribution, in-app purchases and subscriptions, and push notifications</td></tr>
-        <tr><td>RevenueCat</td><td>Managing subscriptions bought through the App Store or Google Play</td></tr>
-        <tr><td>Expo</td><td>App updates and delivering push notifications</td></tr>
-        <tr><td>OpenAI</td><td>AI for post topics and Planner ideas (see <a href="#s3">Section 3</a>)</td></tr>
-        <tr><td>Resend and our email provider</td><td>Sending sign-in codes and account emails</td></tr>
-        <tr><td>Cloudflare and Metered</td><td>Relaying call and Spot room connections when a direct connection isn't possible</td></tr>
-        <tr><td>Hosting provider</td><td>Hosting this website and the web app</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="muted">We may change providers over time. We'll keep this list up to date.</p>
-
-  <h2 id="s6">6. Calls, live rooms and Spot</h2>
-  <ul>
-    <li>Voice and video calls and Spot room voice and video are sent directly between devices where possible, encrypted in transit. When a direct connection isn't possible, they pass through a relay server that can't read the encrypted sound or video.</li>
-    <li>We do <b>not</b> record or store the sound or video of calls or Spot rooms. We keep call details (who, when, how long) and room membership, as described in Section 1.</li>
-    <li>Other people could record a call or room with another device or app without our knowledge. Only share what you're comfortable with.</li>
-    <li><b>Spot TV:</b> videos played in a Spot room come from YouTube. When a video plays, YouTube receives information such as your IP address and device details under <a href="https://policies.google.com/privacy" rel="noopener">Google's Privacy Policy</a>.</li>
-  </ul>
-
-  <h2 id="s7">7. Payments and the marketplace</h2>
-  <ul>
-    <li>Card payments are processed by Stripe. <b>We never see or store your full card number.</b> Stripe uses your information under the <a href="https://stripe.com/privacy" rel="noopener">Stripe Privacy Policy</a>.</li>
-    <li>Subscriptions bought in the app are handled by Apple or Google. We get your plan and its status, not your payment details.</li>
-    <li>We keep records of orders, payments, refunds and payouts as required for accounting, tax, fraud prevention and dispute handling, even after your account is deleted.</li>
-  </ul>
-
-  <h2 id="s8">8. Your choices and controls</h2>
-  <ul>
-    <li><b>Profile:</b> edit your profile any time in Settings → Edit profile.</li>
-    <li><b>Private account:</b> in Settings → Account privacy, make your account private so only followers you approve see your posts and stories and can message you, approve or decline follow requests, and hide view counts.</li>
-    <li><b>Blocking and muting:</b> block people from their profile; see and manage blocked accounts in Settings. Mute people in a Spot room just for you.</li>
-    <li><b>Your content:</b> delete posts, stories, comments and messages you sent. Deleted content is removed from the Service, but copies may remain for a short time in backups, or with people who already saved it.</li>
-    <li><b>Feed:</b> hide posts and tell us you're not interested; your taste profile changes as you use the app.</li>
-    <li><b>Notifications:</b> choose which notifications you get in Settings → Notifications, or turn them off in your phone's settings.</li>
-    <li><b>Device permissions:</b> turn camera, microphone and photos access on or off in your phone's settings.</li>
-    <li><b>2-step sign-in:</b> turn it on, and remove remembered devices, in Settings.</li>
-    <li><b>Emails:</b> if we send you emails about new features, each will have an unsubscribe link. You'll still get account, security and order emails.</li>
-  </ul>
-
-  <h2 id="s9">9. Your privacy rights</h2>
-  <p>Depending on where you live, you may have the right to:</p>
-  <ul>
-    <li><b>Know and access</b> the personal information we have about you, and get a copy in a portable format.</li>
-    <li><b>Correct</b> information that's wrong.</li>
-    <li><b>Delete</b> your information.</li>
-    <li><b>Object to or restrict</b> some uses of your information, or <b>withdraw consent</b> you gave us.</li>
-    <li><b>Opt out</b> of the sale or sharing of personal information, targeted advertising and certain profiling. We don't do these things.</li>
-    <li><b>Appeal</b> if we deny your request.</li>
-    <li><b>Not be discriminated against</b> for using any of these rights.</li>
-  </ul>
-  <p>To make a request, email <a href="mailto:concierge@nationalcompliancehub.com">concierge@nationalcompliancehub.com</a> from the email address on your account, with “Privacy request” in the subject. We'll confirm your identity before acting on a request and reply within the time the law requires (usually 30 to 45 days). You can use an authorized agent; we may ask for proof that they're allowed to act for you. If we deny your request, you can appeal by replying to our answer with “Appeal” in the subject. If you're in the EEA, UK or Switzerland, you can also complain to your local data protection authority.</p>
-
-  <h2 id="s10">10. U.S. state privacy notice</h2>
-  <p>This section gives extra information required by privacy laws in California and other U.S. states. In the last 12 months we have collected the following categories of personal information, from the sources and for the purposes described in Sections 1 and 2:</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Category</th><th>Examples</th><th>Disclosed for business purposes to</th></tr></thead>
-      <tbody>
-        <tr><td>Identifiers</td><td>Name, username, email, phone (if added), account ID, IP address, device and push identifiers</td><td>Service providers; other members (public profile)</td></tr>
-        <tr><td>Customer records</td><td>Contact and payment-related details, order records</td><td>Stripe, Apple, Google, RevenueCat</td></tr>
-        <tr><td>Commercial information</td><td>Orders, purchases, subscriptions, listings, payment requests</td><td>Service providers; the other member in a deal</td></tr>
-        <tr><td>Internet and app activity</td><td>Views, likes, follows, searches, feature use, logs, crash data</td><td>Service providers</td></tr>
-        <tr><td>Audio, visual and similar</td><td>Photos, videos, voice notes and profile photos you share (calls and rooms are not recorded)</td><td>Service providers; people you share with</td></tr>
-        <tr><td>Approximate location</td><td>A city you type in your profile or Planner; region from IP address</td><td>Service providers</td></tr>
-        <tr><td>Inferences</td><td>Taste profile and topics you're interested in</td><td>Service providers</td></tr>
-        <tr><td>Sensitive personal information</td><td>Account login (email and password); contents of messages; seller identity and bank details (collected by Stripe)</td><td>Service providers only</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>We use sensitive personal information only as allowed by law (for example, to provide the Service, keep it secure and process payments), not to infer things about you. We have not sold or “shared” (for cross-context behavioral advertising) personal information, including that of people under 16. We keep each category for the periods described in <a href="#s12">Section 12</a>. Our browser pages don't use advertising trackers, so there's nothing for a Global Privacy Control or Do Not Track signal to switch off; we honor them anyway.</p>
-
-  <h2 id="s11">11. Legal bases (EEA, UK and Switzerland)</h2>
-  <p>If these laws apply to you, we rely on these legal bases:</p>
-  <ul>
-    <li><b>Contract:</b> to provide the Service you signed up for, including your account, content, messages, calls, marketplace orders and subscriptions.</li>
-    <li><b>Legitimate interests:</b> to personalize feeds, keep the Service safe and secure, prevent fraud, improve the Service, and communicate about it, where our interests aren't outweighed by your rights.</li>
-    <li><b>Consent:</b> for device permissions (camera, microphone, photos), push notifications and feature emails. You can withdraw consent at any time.</li>
-    <li><b>Legal obligation:</b> to keep tax and payment records and respond to valid legal requests.</li>
-    <li><b>Vital interests:</b> to protect someone's life or physical safety in an emergency.</li>
-  </ul>
-
-  <h2 id="s12">12. How long we keep information</h2>
-  <p>We keep information for as long as we need it to provide the Service and for the purposes in this policy. For example:</p>
-  <ul>
-    <li><b>Account and content:</b> while your account is open. Content you delete is removed from the Service right away and from backups within about 30 days.</li>
-    <li><b>After you delete your account:</b> we delete your information within 30 days, except what's described below.</li>
-    <li><b>Payment, order and tax records:</b> as long as tax, accounting and payment laws require (often up to 7 years).</li>
-    <li><b>Safety:</b> information about accounts removed for breaking our Terms may be kept longer to stop them coming back and to protect others.</li>
-    <li><b>Legal holds:</b> information needed for a legal claim, investigation or request is kept until it's resolved.</li>
-    <li><b>Logs and diagnostics:</b> server logs and crash reports are kept for a limited time and then deleted.</li>
-  </ul>
-
-  <h2 id="s13">13. Deleting your account</h2>
-  <p id="delete">You can delete your account in the app in <b>Settings → Account → Delete account</b>, or <a href="/delete-account.html">request deletion on the web</a>. This permanently deletes your profile, posts, stories, messages you sent, listings, plans and bookings. It can't be undone. Records we must keep by law are kept as explained in Section 12. Deleting the app from your phone does <b>not</b> delete your account. If you have a subscription, cancel it in the App Store or Google Play as well.</p>
-
-  <h2 id="s14">14. Security</h2>
-  <p>We protect your information with measures such as encryption in transit (HTTPS/TLS), access controls that limit who can read each kind of data, hashed passwords, optional 2-step sign-in, and limits on sign-in attempts. Messages are stored on our servers so they can be delivered across your devices and are not end-to-end encrypted. No system is perfectly secure, so please use a strong, unique password, turn on 2-step sign-in, and tell us right away at <a href="mailto:concierge@nationalcompliancehub.com">concierge@nationalcompliancehub.com</a> if you think your account has been accessed without your permission. If a data breach affects you, we'll notify you as the law requires.</p>
-
-  <h2 id="s15">15. International transfers</h2>
-  <p>Apparently is run from the United States. Your information may be stored and processed in the United States and other countries where our service providers work, which may have different data protection laws from where you live. When we transfer personal information from the EEA, UK or Switzerland, we rely on appropriate safeguards, such as the European Commission's Standard Contractual Clauses.</p>
-
-  <h2 id="s16">16. Children and teens</h2>
-  <p>Apparently is not for children. You must be at least <b>13</b> to use the Service, and at least <b>18</b> to use the marketplace, payments, payouts or Concierge. We don't knowingly collect personal information from children under 13. If we learn that we have, we delete the account and its information. If you believe a child under 13 is using Apparently, please email us. Members aged 13 to 17 should use Apparently with a parent's or guardian's involvement.</p>
-
-  <h2 id="s17">17. Cookies and local storage</h2>
-  <p>The apps store information on your device, such as your sign-in session, settings and saved preferences, so the Service works and remembers your choices. The website and web app use cookies and similar storage only for these essential purposes, such as keeping you signed in. We don't use advertising cookies or third-party ad trackers. You can clear this storage in your browser or phone settings, but you may be signed out or lose saved settings.</p>
-
-  <h2 id="s18">18. Third-party links and content</h2>
-  <p>The Service may include links to, or content from, other websites and services, such as YouTube videos in Spot rooms, Apple Maps or Google Maps links for places, and member-shared links. Those services have their own privacy policies, and we're not responsible for how they handle your information.</p>
-
-  <h2 id="s19">19. Changes to this policy</h2>
-  <p>We may update this policy from time to time. When we do, we'll change the “Effective” date above. If the changes are important, we'll tell you in the app or by email before they take effect. If you keep using the Service after a change takes effect, the updated policy applies.</p>
-
-  <h2 id="s20">20. Contact us</h2>
-  <p>Apparently is owned and operated by <b>Doseofit LLC</b>, which is responsible for your information under this policy. For privacy questions, requests or complaints, email <a href="mailto:concierge@nationalcompliancehub.com">concierge@nationalcompliancehub.com</a> with “Privacy” in the subject.</p>
-
-  <nav><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a><a href="/support.html">Support</a><a href="/delete-account.html">Delete account</a><a href="/concierge.html">Concierge</a></nav>
+  <h2>Contact</h2>
+  <p>Email <a href="mailto:concierge@nationalcompliancehub.com">concierge@nationalcompliancehub.com</a>.</p>
+  <nav><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/support.html">Support</a><a href="/delete-account.html">Delete account</a><a href="/concierge.html">Concierge</a></nav>
 </main>
 </body>
 </html>
