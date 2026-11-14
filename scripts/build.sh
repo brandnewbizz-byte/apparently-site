@@ -40,7 +40,8 @@ RewriteRule . /app/index.html [L]
 HT
 
 cd "$HERE"
-git add -A
+# Only the built site: never sweep up other local files in this repo.
+git add -A site
 git commit -q -m "$MSG" || { echo "No changes"; exit 0; }
 git push -q origin main
 echo "Pushed $(git rev-parse --short HEAD). Now in cPanel: Git Version Control → apparently-site → Update from Remote → Deploy HEAD Commit."

@@ -1,0 +1,5 @@
+
+# Local files that never belong in the built site repo
+.DS_Store
+app-store-screenshots/
+supabase/.temp/
