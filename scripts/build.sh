@@ -18,11 +18,13 @@ cat > "$HERE/site/app/.htaccess" <<'HT'
 # Apparently web app: send any /app/... path to the app's start file.
 # The start file must never be cached, or browsers keep running an old build
 # (its scripts have new names every build, so those can be cached forever).
+# The QR decoder (zxing_reader.wasm) is served from here, not a CDN.
+AddType application/wasm .wasm
 <IfModule mod_headers.c>
 <FilesMatch "\.html$">
 Header set Cache-Control "no-cache, no-store, must-revalidate"
 </FilesMatch>
-<FilesMatch "\.(js|css|png|jpg|ttf|woff2?)$">
+<FilesMatch "\.(js|css|png|jpg|ttf|woff2?|wasm)$">
 Header set Cache-Control "public, max-age=31536000, immutable"
 </FilesMatch>
 </IfModule>
