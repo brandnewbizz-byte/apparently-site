@@ -1,0 +1,24 @@
+# Secret-scan exceptions for this repo only (the global pre-commit hook runs gitleaks).
+# Everything else gitleaks looks for is still blocked.
+
+[extend]
+useDefault = true
+
+# The Supabase anon key (project inejlmksbzujgpwvnnch, role "anon"). It is public:
+# every visitor's browser downloads it, and the database's row rules protect the data.
+# A service-role key or any other JWT is still caught.
+[[allowlists]]
+description = "Supabase public anon key"
+targetRules = ["jwt"]
+regexes = ['''^eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImluZWpsbWtzYnp1amdwd3ZubmNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxMjkzMjEsImV4cCI6MjA4NDcwNTMyMX0\.hcDd2oi_cM1jzQegVMcSVB2UpCFlf52yAn43NRJyELA$''']
+
+# Built dashboard code labels its charts with key:"some_name" (for example
+# key:"fraud_cancels_30d"). Only lowercase snake_case labels inside the built
+# site/ JavaScript are ignored.
+[[allowlists]]
+description = "Chart labels in built site code"
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''^site/.*\.js$''']
+regexTarget = "match"
+regexes = ['''^key:"[a-z]+(_[a-z0-9]+)+"$''']
