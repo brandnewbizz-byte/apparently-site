@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Apparently broadcast</title>
+<!--
+  Room broadcasts (spot-broadcast Edge Function, app migration 100).
+  LiveKit opens this page with ?url=&token= (a hidden recorder that can only
+  watch) plus our room details, films it at 720x1280 and sends the video to
+  Cloudflare Stream. It draws the room: its background, everyone with a camera
+  on, and everyone else who can talk as their profile picture.
+  It tells LiveKit when to start and stop filming by logging START_RECORDING
+  and END_RECORDING (LiveKit's custom template rule).
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #111; color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  #bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  #shade { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.05) 22%, rgba(0,0,0,.05) 75%, rgba(0,0,0,.6) 100%); }
+  header { position: absolute; top: 0; left: 0; right: 0; padding: 44px 40px 0; }
+  .row { display: flex; align-items: center; gap: 14px; }
+  .live { background: #E11D48; color: #fff; font-weight: 800; font-size: 22px; letter-spacing: .08em;
+    padding: 6px 14px; border-radius: 8px; }
+  .count { background: rgba(0,0,0,.45); font-weight: 700; font-size: 22px; padding: 6px 14px; border-radius: 8px; }
+  h1 { margin-top: 18px; font-size: 44px; line-height: 1.12; font-weight: 800;
+    text-shadow: 0 2px 12px rgba(0,0,0,.5); overflow: hidden; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .host { margin-top: 8px; font-size: 24px; opacity: .9; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+  #stage { position: absolute; left: 32px; right: 32px; top: 250px; bottom: 150px;
+    display: flex; flex-wrap: wrap; gap: 18px; align-content: center; justify-content: center; }
+  .tile { position: relative; border-radius: 28px; overflow: hidden; background: rgba(0,0,0,.35);
+    border: 4px solid transparent; transition: border-color .2s; display: flex; align-items: center; justify-content: center; }
+  .tile.speaking { border-color: #34D399; }
+  .tile video { width: 100%; height: 100%; object-fit: cover; }
+  .face { width: 62%; aspect-ratio: 1; border-radius: 50%; background: #6D28D9 center / cover no-repeat;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;
+    border: 4px solid rgba(255,255,255,.85); box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  .name { position: absolute; left: 14px; bottom: 12px; max-width: calc(100% - 28px);
+    background: rgba(0,0,0,.55); padding: 5px 12px; border-radius: 10px; font-size: 22px; font-weight: 700;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .muted::after { content: ""; }
+  #empty { position: absolute; left: 0; right: 0; top: 50%; text-align: center; font-size: 30px; font-weight: 700;
+    opacity: .85; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+  footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 40px 48px; }
+  .brand { font-size: 26px; font-weight: 800; letter-spacing: .01em; }
+  .cta { margin-top: 4px; font-size: 21px; opacity: .85; }
+  .more { position: absolute; right: 40px; bottom: 54px; font-size: 22px; font-weight: 700;
+    background: rgba(0,0,0,.5); padding: 6px 14px; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div id="bg"></div><div id="shade"></div>
+<header>
+  <div class="row"><span class="live">LIVE</span><span class="count" id="count"></span></div>
+  <h1 id="title"></h1>
+  <div class="host" id="host"></div>
+</header>
+<div id="stage"></div>
+<div id="empty"></div>
+<footer>
+  <div class="brand">Apparently</div>
+  <div class="cta">Watch and join this room in the Apparently app</div>
+</footer>
+<div class="more" id="more" hidden></div>
+<script src="./livekit-client.umd.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var LK = window.LivekitClient;
+
+  // ── The room's look (same themes as lib/spot.ts SPOT_THEMES) ─────────────
+  var THEMES = {
+    lounge: ['#2B1B4A', '#5B2A86'], beach: ['#7DD3FC', '#FDE68A'], garden: ['#A7F3D0', '#4ADE80'],
+    night: ['#0B1026', '#1E3A8A'], party: ['#F472B6', '#FB923C'], paper: ['#FAFAF9', '#F1F5F9'],
+  };
+  var PRESETS = ['studio', 'barbershop', 'newsroom', 'press-room', 'courtroom', 'mansion', 'playground'];
+  var colors = THEMES[q.get('theme')] || THEMES.lounge;
+  var bg = document.getElementById('bg');
+  bg.style.background = 'linear-gradient(160deg, ' + colors[0] + ', ' + colors[1] + ')';
+  var scene = q.get('scene') || '';
+  var pic = '';
+  if (scene.indexOf('preset:') === 0 && PRESETS.indexOf(scene.slice(7)) >= 0) pic = 'scenes/' + scene.slice(7) + '.jpg';
+  else if (/^https:\/\//.test(scene)) pic = scene;
+  if (pic) { bg.style.backgroundImage = 'url("' + pic.replace(/"/g, '%22') + '")'; bg.style.backgroundSize = 'cover'; }
+
+  document.getElementById('title').textContent = (q.get('title') || 'Spot room').slice(0, 120);
+  var host = (q.get('host') || '').slice(0, 80);
+  document.getElementById('host').textContent = host ? 'Hosted by ' + host : '';
+
+  var stage = document.getElementById('stage');
+  var empty = document.getElementById('empty');
+  var more = document.getElementById('more');
+  var countEl = document.getElementById('count');
+  var audioBox = document.createElement('div');
+  audioBox.style.display = 'none';
+  document.body.appendChild(audioBox);
+
+  if (!LK || !q.get('url') || !q.get('token')) {
+    // ?demo=N draws N placeholder people, to check the layout in a browser.
+    var demo = Math.min(Number(q.get('demo')) || 0, 14);
+    if (demo > 0) {
+      var names = ['Maya Brooks', 'Jordan Lee', 'Sam Rivera', 'Ava Chen', 'Leo Park', 'Nia Cole', 'Eli Grant', 'Zoe Hart', 'Max Ortiz', 'Ivy Moss', 'Kai Dunn', 'Ren Ito', 'Lia Shaw', 'Ty Ford'];
+      var fake = names.slice(0, demo).map(function (n, i) { return { identity: 'd' + i, name: n }; });
+      var dg = demo <= 1 ? { cols: 1, w: 560, h: 760 } : demo === 2 ? { cols: 1, w: 520, h: 400 } : demo <= 4 ? { cols: 2, w: 318, h: 400 } : demo <= 6 ? { cols: 2, w: 318, h: 260 } : demo <= 9 ? { cols: 3, w: 200, h: 260 } : { cols: 3, w: 200, h: 190 };
+      stage.style.gridTemplateColumns = 'repeat(' + dg.cols + ', ' + dg.w + 'px)';
+      fake.slice(0, 12).forEach(function (p, i) {
+        var el = document.createElement('div'); el.className = 'tile' + (i === 0 ? ' speaking' : '');
+        el.style.width = dg.w + 'px'; el.style.height = dg.h + 'px';
+        var f = document.createElement('div'); f.className = 'face'; f.style.fontSize = Math.round(dg.w * 0.2) + 'px';
+        f.textContent = p.name.split(' ').map(function (s) { return s[0]; }).join('');
+        var nm = document.createElement('div'); nm.className = 'name'; nm.textContent = p.name;
+        el.appendChild(f); el.appendChild(nm); stage.appendChild(el);
+      });
+      countEl.textContent = demo + ' in the room';
+      if (demo > 12) { more.hidden = false; more.textContent = '+' + (demo - 12) + ' more'; }
+      return;
+    }
+    empty.textContent = 'Getting the room ready…';
+    return;
+  }
+
+  var room = new LK.Room({ adaptiveStream: false, dynacast: false });
+  var speaking = {};
+  var MAX = 12;
+
+  function meta(p) {
+    try { return JSON.parse(p.metadata || '{}') || {}; } catch (e) { return {}; }
+  }
+  function cameraOf(p) {
+    var pub = p.getTrackPublication(LK.Track.Source.Camera);
+    return pub && pub.track && !pub.isMuted ? pub.track : null;
+  }
+  function canTalk(p) {
+    if (p.permissions && p.permissions.canPublish === false) return false;
+    return true;
+  }
+  function initials(name) {
+    var parts = String(name || '?').trim().split(/\s+/);
+    return ((parts[0] || '?')[0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+  }
+
+  // Who's shown: people with a camera on first, then whoever is talking, then
+  // everyone else who can talk (in Show mode the audience can't, so they stay off screen).
+  function people() {
+    var all = Array.from(room.remoteParticipants.values()).filter(canTalk);
+    all.sort(function (a, b) {
+      var ca = cameraOf(a) ? 1 : 0, cb = cameraOf(b) ? 1 : 0;
+      if (ca !== cb) return cb - ca;
+      var sa = speaking[a.identity] ? 1 : 0, sb = speaking[b.identity] ? 1 : 0;
+      if (sa !== sb) return sb - sa;
+      return (a.joinedAt ? a.joinedAt.getTime() : 0) - (b.joinedAt ? b.joinedAt.getTime() : 0);
+    });
+    return all;
+  }
+
+  function grid(n) {
+    if (n <= 1) return { cols: 1, w: 560, h: 760 };
+    if (n === 2) return { cols: 1, w: 520, h: 400 };
+    if (n <= 4) return { cols: 2, w: 318, h: 400 };
+    if (n <= 6) return { cols: 2, w: 318, h: 260 };
+    if (n <= 9) return { cols: 3, w: 200, h: 260 };
+    return { cols: 3, w: 200, h: 190 };
+  }
+
+  var tiles = {};
+  function render() {
+    var list = people();
+    var shown = list.slice(0, MAX);
+    var g = grid(shown.length);
+    stage.style.gridTemplateColumns = 'repeat(' + g.cols + ', ' + g.w + 'px)';
+    var keep = {};
+    shown.forEach(function (p, i) {
+      var id = p.identity;
+      keep[id] = true;
+      var t = tiles[id];
+      if (!t) {
+        t = { el: document.createElement('div'), video: null, face: null, name: document.createElement('div'), cam: null };
+        t.el.className = 'tile';
+        t.name.className = 'name';
+        t.el.appendChild(t.name);
+        tiles[id] = t;
+      }
+      t.el.style.width = g.w + 'px';
+      t.el.style.height = g.h + 'px';
+      t.el.classList.toggle('speaking', !!speaking[id]);
+      t.name.textContent = p.name || 'Someone';
+      var cam = cameraOf(p);
+      if (cam !== t.cam) {
+        if (t.video) { if (t.cam) t.cam.detach(t.video); t.video.remove(); t.video = null; }
+        if (t.face) { t.face.remove(); t.face = null; }
+        t.cam = cam;
+        if (cam) {
+          t.video = cam.attach();
+          t.video.muted = true;
+          t.el.insertBefore(t.video, t.name);
+        }
+      }
+      if (!cam && !t.face) {
+        t.face = document.createElement('div');
+        t.face.className = 'face';
+        var av = meta(p).avatar;
+        if (av && /^https:\/\//.test(av)) t.face.style.backgroundImage = 'url("' + av.replace(/"/g, '%22') + '")';
+        else t.face.textContent = initials(p.name);
+        t.face.style.fontSize = Math.round(g.w * 0.2) + 'px';
+        t.el.insertBefore(t.face, t.name);
+      }
+      if (stage.children[i] !== t.el) stage.insertBefore(t.el, stage.children[i] || null);
+    });
+    Object.keys(tiles).forEach(function (id) {
+      if (!keep[id]) {
+        var t = tiles[id];
+        if (t.cam && t.video) t.cam.detach(t.video);
+        t.el.remove();
+        delete tiles[id];
+      }
+    });
+    var total = room.remoteParticipants.size;
+    countEl.textContent = total === 1 ? '1 in the room' : total + ' in the room';
+    empty.textContent = shown.length ? '' : 'The room is quiet right now';
+    if (list.length > MAX) { more.hidden = false; more.textContent = '+' + (list.length - MAX) + ' more'; }
+    else more.hidden = true;
+  }
+
+  // Everyone's voice goes into the broadcast.
+  room.on(LK.RoomEvent.TrackSubscribed, function (track) {
+    if (track.kind === LK.Track.Kind.Audio) {
+      var el = track.attach();
+      audioBox.appendChild(el);
+    }
+    render();
+  });
+  room.on(LK.RoomEvent.TrackUnsubscribed, function (track) {
+    if (track.kind === LK.Track.Kind.Audio) track.detach().forEach(function (el) { el.remove(); });
+    render();
+  });
+  room.on(LK.RoomEvent.ActiveSpeakersChanged, function (list) {
+    speaking = {};
+    list.forEach(function (p) { speaking[p.identity] = true; });
+    render();
+  });
+  [LK.RoomEvent.ParticipantConnected, LK.RoomEvent.ParticipantDisconnected, LK.RoomEvent.TrackMuted,
+   LK.RoomEvent.TrackUnmuted, LK.RoomEvent.ParticipantPermissionsChanged, LK.RoomEvent.ParticipantNameChanged,
+   LK.RoomEvent.ParticipantMetadataChanged].forEach(function (ev) { if (ev) room.on(ev, render); });
+  room.on(LK.RoomEvent.Disconnected, function () {
+    console.log('END_RECORDING');
+  });
+
+  room.connect(q.get('url'), q.get('token'), { autoSubscribe: true })
+    .then(function () {
+      render();
+      // Give the background and faces a moment to load before filming starts.
+      setTimeout(function () { console.log('START_RECORDING'); }, 800);
+    })
+    .catch(function (e) {
+      console.error('connect failed', e);
+      empty.textContent = 'Reconnecting…';
+      console.log('START_RECORDING');
+    });
+  setInterval(render, 3000);
+})();
+</script>
+</body>
+</html>
