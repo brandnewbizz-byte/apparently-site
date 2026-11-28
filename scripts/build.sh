@@ -9,7 +9,15 @@ APP="${APP:-$HERE/../apparently-app}"
 MSG="${1:-Site build}"
 
 (cd "$DASH" && npx vite build)
-(cd "$APP" && rm -rf dist-web-app && WEB_BASE_URL=/app npx expo export -p web --output-dir dist-web-app)
+# --clear: Metro's cache is shared by every checkout of the app on this Mac
+# (they share node_modules), and a cached router could point at another
+# checkout's screens. On Nov 27 2026 that shipped a web app with no screens.
+(cd "$APP" && rm -rf dist-web-app && WEB_BASE_URL=/app npx expo export -p web --output-dir dist-web-app --clear)
+# Never ship a web app without its screens.
+if ! grep -rqs "Welcome back" "$APP/dist-web-app/_expo/static/js/web/"; then
+  echo "The web app build has no sign-in screen: something's wrong with the build. Not shipping it." >&2
+  exit 1
+fi
 
 rm -rf "$HERE/site"
 cp -a "$DASH/dist" "$HERE/site"
@@ -31,6 +39,12 @@ Header set Cache-Control "public, max-age=31536000, immutable"
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /app/
+# The app's address is theapparentlyapp.com (Nov 27 2026): the old address
+# and www forward there with the same path. (The site's root .htaccess does
+# the same for everything outside /app.)
+RewriteCond %{HTTP_HOST} ^apparentlyappdashboard\.nationalcompliancehub\.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www\.theapparentlyapp\.com$ [NC]
+RewriteRule ^ https://theapparentlyapp.com%{REQUEST_URI} [L,R=301]
 # Always use HTTPS.
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
